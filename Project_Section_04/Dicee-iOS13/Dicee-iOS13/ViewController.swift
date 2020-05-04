@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var diceImageView2: UIImageView!
     
     var leftDiceNumber = 1
-    var rightDiceNumber = 5
+    var rightDiceNumber = 1
     
     
     override func viewDidLoad() {
@@ -23,11 +23,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func rollButtonPressed(_ sender: UIButton) {
-        diceImageView1.image = [ #imageLiteral(resourceName: "DiceOne"), #imageLiteral(resourceName: "DiceTwo"), #imageLiteral(resourceName: "DiceThree"), #imageLiteral(resourceName: "DiceFour"), #imageLiteral(resourceName: "DiceFive"), #imageLiteral(resourceName: "DiceSix") ][leftDiceNumber]
-        diceImageView2.image = [ #imageLiteral(resourceName: "DiceOne"), #imageLiteral(resourceName: "DiceTwo"), #imageLiteral(resourceName: "DiceThree"), #imageLiteral(resourceName: "DiceFour"), #imageLiteral(resourceName: "DiceFive"), #imageLiteral(resourceName: "DiceSix") ][rightDiceNumber]
+        let diceArray = [ #imageLiteral(resourceName: "DiceOne"), #imageLiteral(resourceName: "DiceTwo"), #imageLiteral(resourceName: "DiceThree"), #imageLiteral(resourceName: "DiceFour"), #imageLiteral(resourceName: "DiceFive"), #imageLiteral(resourceName: "DiceSix") ]
         
-        leftDiceNumber += 1
-        rightDiceNumber -= 1
+        diceImageView1.image = diceArray[leftDiceNumber]
+        diceImageView2.image = diceArray[rightDiceNumber]
+        
+        // 랜덤으로 주사위를 바꿀 수 있는 두가지 방법
+        diceImageView1.image = diceArray.randomElement()
+        rightDiceNumber = Int.random(in: 0...5)
     }
     
 }
