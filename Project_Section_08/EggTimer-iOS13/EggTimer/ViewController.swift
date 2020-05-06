@@ -17,9 +17,11 @@ class ViewController: UIViewController {
     let eggTimes = ["Soft" : 5, "Medium" : 7, "Hard" : 12]
     var timer : Timer?
     var counter = 0
+    var total = 0
     
     @objc func prozessTimer() {
         counter -= 1
+        progressBar.progress = Float(counter) / Float(total)
         print(counter)
         if counter == 0 {
             timer?.invalidate()
@@ -28,18 +30,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction func eggButtonPressed(sender: UIButton) {
+        let hardness = sender.currentTitle
+
         mainLabel.text = "How do you like your eggs?"
         timer?.invalidate()
-        progressBar.progress = 1.0
-        
-        let hardness = sender.currentTitle
+        total = eggTimes[hardness!]!
         
         if hardness == "Soft" {
             counter = eggTimes[hardness!]!
         }
         else if hardness == "Medium" {
             counter = eggTimes[hardness!]!
-            
         }
         else if hardness == "Hard" {
             counter = eggTimes[hardness!]!
