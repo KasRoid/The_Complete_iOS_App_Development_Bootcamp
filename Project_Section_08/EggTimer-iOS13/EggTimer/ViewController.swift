@@ -10,22 +10,38 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let softTime = 5
-    let mediumTime = 7
-    let hardTime = 12
+    @IBOutlet weak var mainLabel: UILabel!
+    
+    let eggTimes = ["Soft" : 5, "Medium" : 7, "Hard" : 12]
+    var timer : Timer?
+    var counter = 0
+    
+    @objc func prozessTimer() {
+        counter -= 1
+        print(counter)
+        if counter == 0 {
+            timer?.invalidate()
+            mainLabel.text = "DONE"
+        }
+    }
     
     @IBAction func eggButtonPressed(sender: UIButton) {
+        mainLabel.text = "How do you like your eggs?"
+        timer?.invalidate()
+        
         let hardness = sender.currentTitle
         
         if hardness == "Soft" {
-            print(softTime)
+            counter = eggTimes[hardness!]!
         }
         else if hardness == "Medium" {
-            print(mediumTime)
+            counter = eggTimes[hardness!]!
+            
         }
         else if hardness == "Hard" {
-            print(hardTime)
+            counter = eggTimes[hardness!]!
         }
+        timer = Timer.scheduledTimer(timeInterval:1, target:self, selector:#selector(prozessTimer), userInfo: nil, repeats: true)
     }
 
 }
