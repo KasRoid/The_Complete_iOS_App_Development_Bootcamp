@@ -11,6 +11,8 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var mainLabel: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
+    
     
     let eggTimes = ["Soft" : 5, "Medium" : 7, "Hard" : 12]
     var timer : Timer?
@@ -28,6 +30,7 @@ class ViewController: UIViewController {
     @IBAction func eggButtonPressed(sender: UIButton) {
         mainLabel.text = "How do you like your eggs?"
         timer?.invalidate()
+        progressBar.progress = 1.0
         
         let hardness = sender.currentTitle
         
@@ -41,6 +44,8 @@ class ViewController: UIViewController {
         else if hardness == "Hard" {
             counter = eggTimes[hardness!]!
         }
+        
+        
         timer = Timer.scheduledTimer(timeInterval:1, target:self, selector:#selector(prozessTimer), userInfo: nil, repeats: true)
     }
 
