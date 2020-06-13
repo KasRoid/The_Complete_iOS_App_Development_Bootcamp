@@ -42,6 +42,7 @@ class ViewController: UIViewController {
         scoreLabel.text = ("Score: \(quizBrain.getScore())")
         questionLabel.text = quizBrain.questionText()
         progressBar.progress = quizBrain.getProgress()
+        progressBar.progressTintColor = .green
         trueButton.backgroundColor = UIColor.clear
         falseButton.backgroundColor = UIColor.clear
     }
